@@ -1,12 +1,17 @@
 package mrjake.aunis.config;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.launchwrapper.Launch;
 import net.minecraftforge.common.config.Config;
-import net.minecraftforge.common.config.Config.*;
-
-import java.util.ArrayList;
-import java.util.List;
+import net.minecraftforge.common.config.Config.Comment;
+import net.minecraftforge.common.config.Config.Name;
+import net.minecraftforge.common.config.Config.RangeDouble;
+import net.minecraftforge.common.config.Config.RangeInt;
+import net.minecraftforge.common.config.Config.RequiresMcRestart;
+import net.minecraftforge.common.config.Config.RequiresWorldRestart;
 
 @Config(modid="aunis", name="aunis")
 public class AunisConfig {
@@ -64,30 +69,29 @@ public class AunisConfig {
 		})
 		public boolean disableAnimatedEventHorizon = false;
 
-		@Name("Kawoosh Invincible Blocks")
+		@Name("Kawoosh invincible blocks")
 		@Comment({"Format: \"modid:blockid:meta\". Example: \"minecraft:wool:7\""})
 		public String[] kawooshInvincibleBlocks = {};
 
 		private List<StargateBlockConfigEntry> cachedInvincibleBlocks = null;
 
-		public boolean canKawooshDestroyBlock(IBlockState state){
+		public boolean canKawooshDestroyBlock(IBlockState state) {
 			if (cachedInvincibleBlocks == null) {
 				cachedInvincibleBlocks = new ArrayList<>();
 
 				for (String line : kawooshInvincibleBlocks) {
 					StargateBlockConfigEntry en = StargateBlockConfigEntry.fromString(line);
-					if(en != null)
+					
+					if(en != null) {
 						cachedInvincibleBlocks.add(en);
+					}
 				}
 			}
 
-			if (cachedInvincibleBlocks.isEmpty()) {
-				return true;
-			}
-
 			for(StargateBlockConfigEntry en : cachedInvincibleBlocks) {
-				if(en.contains(state))
+				if(en.contains(state)) {
 					return false;
+				}
 			}
 
 			return true;

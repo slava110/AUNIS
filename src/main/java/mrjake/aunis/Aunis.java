@@ -2,14 +2,13 @@ package mrjake.aunis;
 
 import java.io.IOException;
 
-import mrjake.aunis.config.AunisConfig;
-import net.minecraft.launchwrapper.Launch;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import mrjake.aunis.capability.endpoint.ItemEndpointCapability;
 import mrjake.aunis.chunkloader.ChunkLoadingCallback;
 import mrjake.aunis.command.AunisCommands;
+import mrjake.aunis.config.AunisConfig;
 import mrjake.aunis.config.StargateDimensionConfig;
 import mrjake.aunis.datafixer.TileNamesFixer;
 import mrjake.aunis.fluid.AunisFluids;
@@ -41,7 +40,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 @Mod( modid = Aunis.ModID, name = Aunis.Name, version = Aunis.Version, acceptedMinecraftVersions = Aunis.MCVersion, dependencies = "after:cofhcore@[4.6.0,);after:opencomputers" )
 public class Aunis {	
     public static final String ModID = "aunis";
-    public static final String Name = "AUNIS";
+    public static final String Name = "Aunis";
     public static final String Version = "${version}";
     public static final int DATA_VERSION = 7;
 
@@ -57,7 +56,7 @@ public class Aunis {
     
     @SidedProxy(clientSide = Aunis.CLIENT, serverSide = Aunis.SERVER)
     public static IProxy proxy;
-    public static Logger logger = LogManager.getLogger("Aunis");
+    public static Logger logger = LogManager.getLogger(ModID);
         
     // ------------------------------------------------------------------------
     // OpenComputers
@@ -73,8 +72,8 @@ public class Aunis {
     }
         	
     @EventHandler
-    public void preInit(FMLPreInitializationEvent event){
-        AunisPacketHandler.registerPackets();
+    public void preInit(FMLPreInitializationEvent event) {
+    	AunisPacketHandler.registerPackets();
         AunisFluids.registerFluids();
         
     	StargateDimensionConfig.load(event.getModConfigurationDirectory());

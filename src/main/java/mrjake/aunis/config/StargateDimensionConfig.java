@@ -17,7 +17,6 @@ import mrjake.aunis.Aunis;
 import mrjake.aunis.stargate.power.StargateEnergyRequired;
 import net.minecraft.world.DimensionType;
 import net.minecraftforge.common.DimensionManager;
-import org.apache.logging.log4j.message.MapMessage;
 
 public class StargateDimensionConfig {
 	
